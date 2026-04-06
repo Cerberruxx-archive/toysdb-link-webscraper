@@ -1,3 +1,4 @@
+// WORKING 100%
 // import {createWriteStream} from 'node:fs';
 /*
 Above command generated a 'ReferenceError: require is not defined in ES module scope'. Commented out the 'import' code and it runs smoothly; this is for CommonJS (opposite of ES Module).
