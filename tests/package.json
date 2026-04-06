@@ -1,0 +1,24 @@
+{
+  "name": "html-metadata-log-for-toys-db",
+  "version": "1.0.0",
+  "description": "",
+  "main": "metadata_log.js",
+"dependencies": {
+"cheerio": "^1.0.0"
+},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cerberruxx-archive/HTML-metadata-log-for-toys-db.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/Cerberruxx-archive/HTML-metadata-log-for-toys-db/issues"
+  },
+  "homepage": "https://github.com/Cerberruxx-archive/HTML-metadata-log-for-toys-db#readme"
+}
