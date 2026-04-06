@@ -1,3 +1,4 @@
+// WORKING 100%
 // TypeError [ERR_INVALID_ARG_TYPE]: The "path" argument must be of type string or an instance of Buffer or URL. Received an instance of Array
 /*
 Error fix: added 'filename' to 'const stream = createWriteStream({flags: 'a'});'
