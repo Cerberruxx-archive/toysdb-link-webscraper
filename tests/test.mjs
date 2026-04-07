@@ -1,9 +1,3 @@
-// [ERR_MODULE_NOT_FOUND]: Cannot find package 'cheerio' imported from (the current path)
-// FIX: Downloaded cheerio via npm install cheerio
-// `Failed to scrape ${url}: Attribute selector didn't terminate`
-// FIX: added ` symbol at the end of piped data stream
-// Current issue (not error): meta property links not displaying info
-
 console.log('Test script started.');
 
 import * as cheerio from 'cheerio';
@@ -15,6 +9,13 @@ const urls = [
 'https://www.mercari.com/us/item/m41387543402/',
 ];
 
+function delay(ms) {
+	return new Promise(function(resolve) {
+		return setTimeout(resolve, ms);
+	});
+}
+
+
 async function scrape(urlList, filename) {
 	const stream = createWriteStream(filename, {flags: 'a'});
 	
@@ -22,18 +23,21 @@ async function scrape(urlList, filename) {
 		try {
 			console.log(`Scraping from: ${url}...`);
 			
-			const response = await fetch(url);
+			// Sends a request with a header for session validation
+			const response = await fetch(url, {headers: {'User-Agent':'Mozilla/5.0'}});
 			const html = await response.text();
+			
+			// Waits 3 seconds to avoid session timeout/IP block
+			console.log("Loading...");
+			await delay(3000);
+console.log("HTML Preview:", html.substring(0, 500));
 			const $ = cheerio.load(html); // what's this line doing?
 			
 			// Extract the metadata
-			const title = $('meta[property="og:title"]').attr('content') || 'N/A Title ';
+			const title = $('meta[property="og:title"]').attr('content') || $('meta[name="title"]').attr('content') || 'N/A Title ';
 			const desc = $('meta[property="og:description"]').attr('content') || 'N/A Title ';
 			const siteName = $('meta[property="og:site_name"]').attr('content') || 'N/A Site Name ';
 			const image = $('meta[property="og:image"]').attr('content') || 'N/A img link ';
-			/*
-			Add other links later-only do three for examples' sake
-			*/
 
 			// Format the data as a single string line
 			const dataLine = `Site Link: ${url} | Title: ${title} | Desc: ${desc}\n | SiteName: ${siteName} | ImageLink: ${image}`;
